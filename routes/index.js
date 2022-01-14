@@ -85,15 +85,14 @@ router.get('/info', function(req,res){
 router.get('/nld', function(req,res){
   var params = {
     TableName: "Countries",
-    ProjectionExpression: "#nom.common",
+    ProjectionExpression: "#languages.nld",
     KeyConditionExpression:"#reg = :reg",
     ExpressionAttributeNames: {
-        "#nom": "nom",
-        "#superficie": "superficie",
-        "#reg":"regionc"
+        "#name.official": 1,
+        "_id":0,
     },
     ExpressionAttributeValues: {
-      ":reg": "Africa"
+      ":reg": "Dutch"
   },
   };
   docClient.query(params, function(err, data) {
