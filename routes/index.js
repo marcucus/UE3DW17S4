@@ -98,4 +98,21 @@ router.get('/nld', function(req,res){
   });
 });
 
+router.get("/btw", function (req, res) {
+  var params = {
+      TableName: "Countries",
+      IndexName: "SuperficieIndex",
+      ProjectionExpression:"#nom, #superficie",
+      ExpressionAttributeNames: {
+          "#nom":"nom",
+          "#superficie": "superficie"
+      },
+  };
+  docClient.scan(params, function(err, data) {
+    res.render('btw', {
+      "countries" : data.Items
+    });
+  });
+});
+
 module.exports = router;

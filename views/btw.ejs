@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Superficie</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+      <%- include('header'); %>
+    <h1>Noms et superficie des pays ayant une superficie entre 400000 et 500000 km2</h1>
+    <table class="table_af">
+        <tr>
+            <th>Nom</th>
+            <th>Superficie</th>
+        </tr>
+        <%
+        var list = '';
+            for (i = 0; i < countries.length; i++) {
+              if(countries[i].superficie >= 399999 && countries[i].superficie <= 500000)
+                list += '<tr><td>' + countries[i].nom + '</td><td>' + countries[i].superficie + ' Km²</td></tr>';
+            }
+        %>
+        <%- list %>
+    </table>
+  </body>
+</html>
