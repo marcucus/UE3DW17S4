@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%- include('header'); %>
+  <h1>Noms des pays ayant le néerlandais parmi leurs langues officielles</h1>
+  <table class="table_af">
+      <tr>
+          <th>Nom</th>
+          <th>Langue Néerlendais</th>
+      </tr>
+          <%
+              nb=0;
+              for (i = 0; i < countries.length; i++) {%>
+                  <tr><td><%=countries[i].nom.common%></td></tr><%
+              }
+          %>
+  </table>
+</body>
+</html>
