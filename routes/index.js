@@ -36,20 +36,22 @@ router.get('/europe', function(req,res){
   });
 });
 
-router.get('/tri', function(req,res){
+router.get("/tri", function (req, res) {
   var params = {
-    TableName: "Countries",
-    ProjectionExpression: "#nom, #superficie",
-    Limit:"12",
-    KeyConditionExpression:"#reg = :reg",
-    ExpressionAttributeNames: {
-        "#nom": "nom",
-        "#superficie": "superficie",
-        "#reg":"regionc"
-    },
-    ExpressionAttributeValues: {
-      ":reg": "Africa"
-  },
+      TableName: "Countries",
+      IndexName: "SuperficieIndex",
+      ProjectionExpression:"#nom, #superficie",
+      KeyConditionExpression: "#rg = :rgvalue AND #superficie > :value",
+      ExpressionAttributeNames: {
+          "#rg": "regionc",
+          "#nom":"nom",
+          "#superficie": "superficie"
+      },
+      ExpressionAttributeValues: {
+          ":rgvalue": "Africa",
+          ":value": 0
+      },
+      Limit:"12",
   };
   docClient.query(params, function(err, data) {
     res.render('tri', {
@@ -60,24 +62,23 @@ router.get('/tri', function(req,res){
 
 //All infos
 
-router.get('/info', function(req,res){
+/* GET all info from one country */
+router.get("/info", function (req, res) {
   var params = {
-    TableName: "Countries",
-    ProjectionExpression: "#nom.common",
-    KeyConditionExpression:"#reg = :reg",
-    ExpressionAttributeNames: {
-        "#nom": "nom",
-        "#superficie": "superficie",
-        "#reg":"regionc"
-    },
-    ExpressionAttributeValues: {
-      ":reg": "France"
-  },
+      TableName: "Countries",
+      FilterExpression: "#nm = :nom",
+      ExpressionAttributeNames: {
+          "#nm": "nom",
+      },
+      ExpressionAttributeValues: {
+          ":nom": "France",
+      },
   };
-  docClient.query(params, function(err, data) {
-    res.render('info', {
-      "countries" : data.Items
-    });
+  docClient.scan(params, function (err, data) {
+      console.log(data.Items);
+      res.render("info", {
+          "countries": data.Items,
+      });
   });
 });
 
@@ -85,20 +86,16 @@ router.get('/info', function(req,res){
 router.get('/nld', function(req,res){
   var params = {
     TableName: "Countries",
-    ProjectionExpression: "#languages.nld",
-    KeyConditionExpression:"#reg = :reg",
-    ExpressionAttributeNames: {
-        "#name.official": 1,
-        "_id":0,
-    },
+    FilterExpression: "langues.nld = :lang",
     ExpressionAttributeValues: {
-      ":reg": "Dutch"
-  },
+      ":lang": "Dutch"
+  }
   };
-  docClient.query(params, function(err, data) {
+  docClient.scan(params, function(err, data) {
     res.render('nld', {
       "countries" : data.Items
     });
   });
 });
+
 module.exports = router;

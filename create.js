@@ -16,6 +16,19 @@ var params = {
     AttributeDefinitions: [       
         { AttributeName: "regionc", AttributeType: "S" },
         { AttributeName: "nom", AttributeType: "S" },
+        { AttributeName: "superficie", AttributeType: "N" },
+    ],
+    LocalSecondaryIndexes: [
+        {
+            IndexName: "SuperficieIndex",
+            KeySchema: [
+                { AttributeName: "regionc", KeyType: "HASH" }, //Partition key
+                { AttributeName: "superficie", KeyType: "RANGE" }, //Sort key
+            ],
+            Projection: {
+                ProjectionType: "KEYS_ONLY",
+            },
+        },
     ],
     ProvisionedThroughput: {       
         ReadCapacityUnits: 10, 
