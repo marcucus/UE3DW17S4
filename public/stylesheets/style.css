@@ -1,0 +1,35 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.table_af {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table_af td, .table_af th {
+  border: 1px solid #f3f3f3;
+  padding: 8px;
+}
+
+.table_af tr:nth-child(even){
+  background-color: #f4f4f4;
+}
+
+.table_af tr:hover {
+  background-color: #dddddd;
+}
+
+.table_af th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #212429;
+  color: white;
+}

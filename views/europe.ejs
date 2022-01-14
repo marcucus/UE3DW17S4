@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Noms des pays européens</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+      <%- include('header'); %>
+    <h1>Tous les noms des pays européens :</h1>
+    <table class="table_af">
+        <tr>
+            <th>Nom</th>
+        </tr>
+            <%
+                var list = '';
+                for (i = 0; i < countries.length; i++) {
+                    list += '<tr><td>' + countries[i].nom + '</td></tr>';
+                }
+            %>
+            <%- list %>
+    </table>
+  </body>
+</html>
