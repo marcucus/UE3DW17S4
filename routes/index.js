@@ -58,4 +58,48 @@ router.get('/tri', function(req,res){
   });
 });
 
+//All infos
+
+router.get('/info', function(req,res){
+  var params = {
+    TableName: "Countries",
+    ProjectionExpression: "#nom.common",
+    KeyConditionExpression:"#reg = :reg",
+    ExpressionAttributeNames: {
+        "#nom": "nom",
+        "#superficie": "superficie",
+        "#reg":"regionc"
+    },
+    ExpressionAttributeValues: {
+      ":reg": "France"
+  },
+  };
+  docClient.query(params, function(err, data) {
+    res.render('info', {
+      "countries" : data.Items
+    });
+  });
+});
+
+// Néerlendais
+router.get('/nld', function(req,res){
+  var params = {
+    TableName: "Countries",
+    ProjectionExpression: "#nom.common",
+    KeyConditionExpression:"#reg = :reg",
+    ExpressionAttributeNames: {
+        "#nom": "nom",
+        "#superficie": "superficie",
+        "#reg":"regionc"
+    },
+    ExpressionAttributeValues: {
+      ":reg": "Africa"
+  },
+  };
+  docClient.query(params, function(err, data) {
+    res.render('nld', {
+      "countries" : data.Items
+    });
+  });
+});
 module.exports = router;
