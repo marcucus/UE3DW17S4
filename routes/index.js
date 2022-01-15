@@ -115,4 +115,21 @@ router.get("/btw", function (req, res) {
   });
 });
 
+router.get("/letter", function (req, res) {
+  var params = {
+    TableName: "Countries",
+    ProjectionExpression:"#nom",
+    ExpressionAttributeNames: {
+        "#nom":"nom"
+    },
+  };
+  docClient.scan(params, function(err, data) {
+    res.render('letter', {
+      "countries" : data.Items,
+    });
+  });
+});
+
+
+
 module.exports = router;
