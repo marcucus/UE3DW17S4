@@ -115,20 +115,26 @@ router.get("/btw", function (req, res) {
   });
 });
 
+//Question 5
 router.get("/letter", function (req, res) {
   var params = {
-    TableName: "Countries",
-    ProjectionExpression:"#nom",
-    ExpressionAttributeNames: {
-        "#nom":"nom"
-    },
+      TableName: "Countries",
+      FilterExpression: "#nm = :nom",
+      ExpressionAttributeNames: {
+          "#nm": "nom",
+      },
+      ExpressionAttributeValues: {
+          ":nom": "F%",
+      },
   };
-  docClient.scan(params, function(err, data) {
-    res.render('letter', {
-      "countries" : data.Items,
-    });
+  docClient.scan(params, function (err, data) {
+      console.log(data.Items);
+      res.render("letter", {
+          "countries": data.Items
+      });
   });
 });
+
 
 
 
