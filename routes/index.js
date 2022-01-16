@@ -51,7 +51,7 @@ router.get("/tri", function (req, res) {
           ":rgvalue": "Africa",
           ":value": 0
       },
-      Limit:"12",
+      Limit:21,
   };
   docClient.query(params, function(err, data) {
     res.render('tri', {
@@ -98,6 +98,7 @@ router.get('/nld', function(req,res){
   });
 });
 
+// superficie entre deux valeurs
 router.get("/btw", function (req, res) {
   var params = {
       TableName: "Countries",
@@ -115,16 +116,13 @@ router.get("/btw", function (req, res) {
   });
 });
 
-//Question 5
+// lettre donée
 router.get("/letter", function (req, res) {
   var params = {
       TableName: "Countries",
-      FilterExpression: "#nm = :nom",
+      ProjectionExpression:"#nom",
       ExpressionAttributeNames: {
-          "#nm": "nom",
-      },
-      ExpressionAttributeValues: {
-          ":nom": "F%",
+          "#nom": "nom",
       },
   };
   docClient.scan(params, function (err, data) {
@@ -134,8 +132,5 @@ router.get("/letter", function (req, res) {
       });
   });
 });
-
-
-
 
 module.exports = router;

@@ -13,11 +13,12 @@
             </tr>
                 <%
                     var list = '';
-                        for (i = 0; i < countries.length; i++) {
-						if(countries[i].nom[0]=='F'){
-                                list += '<tr><td>' + countries[i].nom + '</td></tr>';
+                      for (i = 0; i < countries.length; i++) {
+                        let txt = countries[i].nom;
+						            if(txt.startsWith('F')){
+                            list += '<tr><td>' + countries[i].nom + '</td></tr>';
                         }
-						}
+					        	}
                 %>
                 <%- list %>
         </table>
