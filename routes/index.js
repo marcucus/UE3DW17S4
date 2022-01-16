@@ -15,6 +15,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+// tri pays européens
 router.get('/europe', function(req,res){
   var params = {
     TableName: "Countries",
@@ -36,6 +37,7 @@ router.get('/europe', function(req,res){
   });
 });
 
+// tri superficie pays africain
 router.get("/tri", function (req, res) {
   var params = {
       TableName: "Countries",
@@ -62,7 +64,7 @@ router.get("/tri", function (req, res) {
 
 //All infos
 
-/* GET all info from one country */
+/* Info d'un pays */
 router.get("/info", function (req, res) {
   var params = {
       TableName: "Countries",
@@ -116,7 +118,7 @@ router.get("/btw", function (req, res) {
   });
 });
 
-// lettre donée
+// lettre donnée
 router.get("/letter", function (req, res) {
   var params = {
       TableName: "Countries",
